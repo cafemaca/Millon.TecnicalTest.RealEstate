@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Common\Abstractions\**" />
+    <Compile Remove="Common\Exceptions\**" />
+    <Compile Remove="Common\Interfaces\**" />
+    <Compile Remove="DomainEvents\**" />
+    <Compile Remove="ValueObjects\**" />
+    <EmbeddedResource Remove="Common\Abstractions\**" />
+    <EmbeddedResource Remove="Common\Exceptions\**" />
+    <EmbeddedResource Remove="Common\Interfaces\**" />
+    <EmbeddedResource Remove="DomainEvents\**" />
+    <EmbeddedResource Remove="ValueObjects\**" />
+    <None Remove="Common\Abstractions\**" />
+    <None Remove="Common\Exceptions\**" />
+    <None Remove="Common\Interfaces\**" />
+    <None Remove="DomainEvents\**" />
+    <None Remove="ValueObjects\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Millon.TecnicalTest.RealEstate.Common.Domain\Millon.TecnicalTest.RealEstate.Common.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

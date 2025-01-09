@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Common\Abstractions\**" />
+    <Compile Remove="Common\CustomEntities\**" />
+    <Compile Remove="Common\Enumerations\**" />
+    <Compile Remove="Common\Exceptions\**" />
+    <Compile Remove="Common\Mapping\**" />
+    <Compile Remove="Common\QueryFilter\**" />
+    <Compile Remove="Common\Static\**" />
+    <Compile Remove="UseCases\Audit\Commands\**" />
+    <Compile Remove="UseCases\Audit\Events\**" />
+    <Compile Remove="UseCases\Audit\Queries\**" />
+    <Compile Remove="UseCases\Users\Commands\**" />
+    <Compile Remove="UseCases\Users\Events\**" />
+    <Compile Remove="UseCases\Users\Queries\**" />
+    <EmbeddedResource Remove="Common\Abstractions\**" />
+    <EmbeddedResource Remove="Common\CustomEntities\**" />
+    <EmbeddedResource Remove="Common\Enumerations\**" />
+    <EmbeddedResource Remove="Common\Exceptions\**" />
+    <EmbeddedResource Remove="Common\Mapping\**" />
+    <EmbeddedResource Remove="Common\QueryFilter\**" />
+    <EmbeddedResource Remove="Common\Static\**" />
+    <EmbeddedResource Remove="UseCases\Audit\Commands\**" />
+    <EmbeddedResource Remove="UseCases\Audit\Events\**" />
+    <EmbeddedResource Remove="UseCases\Audit\Queries\**" />
+    <EmbeddedResource Remove="UseCases\Users\Commands\**" />
+    <EmbeddedResource Remove="UseCases\Users\Events\**" />
+    <EmbeddedResource Remove="UseCases\Users\Queries\**" />
+    <None Remove="Common\Abstractions\**" />
+    <None Remove="Common\CustomEntities\**" />
+    <None Remove="Common\Enumerations\**" />
+    <None Remove="Common\Exceptions\**" />
+    <None Remove="Common\Mapping\**" />
+    <None Remove="Common\QueryFilter\**" />
+    <None Remove="Common\Static\**" />
+    <None Remove="UseCases\Audit\Commands\**" />
+    <None Remove="UseCases\Audit\Events\**" />
+    <None Remove="UseCases\Audit\Queries\**" />
+    <None Remove="UseCases\Users\Commands\**" />
+    <None Remove="UseCases\Users\Events\**" />
+    <None Remove="UseCases\Users\Queries\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Millon.TecnicalTest.RealEstate.Common.Application\Millon.TecnicalTest.RealEstate.Common.Application.csproj" />
+    <ProjectReference Include="..\Millon.TecnicalTest.RealEstate.Domain\Millon.TecnicalTest.RealEstate.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

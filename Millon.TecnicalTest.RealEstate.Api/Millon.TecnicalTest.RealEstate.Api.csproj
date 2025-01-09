@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <UserSecretsId>44fb7854-0a84-4236-ac0f-5b777721913e</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Common\**" />
+    <Compile Remove="Filters\**" />
+    <Compile Remove="Middleware\Exceptions\**" />
+    <Compile Remove="Middleware\Version\**" />
+    <Compile Remove="Response\**" />
+    <Content Remove="Common\**" />
+    <Content Remove="Filters\**" />
+    <Content Remove="Middleware\Exceptions\**" />
+    <Content Remove="Middleware\Version\**" />
+    <Content Remove="Response\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <EmbeddedResource Remove="Filters\**" />
+    <EmbeddedResource Remove="Middleware\Exceptions\**" />
+    <EmbeddedResource Remove="Middleware\Version\**" />
+    <EmbeddedResource Remove="Response\**" />
+    <None Remove="Common\**" />
+    <None Remove="Filters\**" />
+    <None Remove="Middleware\Exceptions\**" />
+    <None Remove="Middleware\Version\**" />
+    <None Remove="Response\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="9.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI" Version="9.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="9.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="9.0.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+    <PackageReference Include="Serilog.Enrichers.ClientInfo" Version="2.1.2" />
+    <PackageReference Include="Serilog.Expressions" Version="5.0.0" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="9.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Millon.TecnicalTest.RealEstate.Application\Millon.TecnicalTest.RealEstate.Application.csproj" />
+    <ProjectReference Include="..\Millon.TecnicalTest.RealEstate.Common.Api\Millon.TecnicalTest.RealEstate.Common.Api.csproj" />
+    <ProjectReference Include="..\Millon.TecnicalTest.RealEstate.Data\Millon.TecnicalTest.RealEstate.Data.csproj" />
+  </ItemGroup>
+
+</Project>
