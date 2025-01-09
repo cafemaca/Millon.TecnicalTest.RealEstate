@@ -6,7 +6,7 @@
 //  Last Modified By : Carlos Fernando Malagón Cano
 //  Last Modified On : 11-10-2024
 //  ****************************************************************
-//  <copyright file="UsuarioController.cs"
+//  <copyright file="OwnerController.cs"
 //      company="Cafemaca - CAFEMACA Colombia">
 //      Cafemaca - CAFEMACA Colombia
 //  </copyright>
@@ -15,8 +15,8 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Millon.TecnicalTest.RealEstate.Application.Common.Dtos.Users;
-using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Services.Users;
+using Millon.TecnicalTest.RealEstate.Application.Common.Dtos.Owners;
+using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Services.Owner;
 using Millon.TecnicalTest.RealEstate.Application.Common.Options;
 using Millon.TecnicalTest.RealEstate.Common.Api.Common;
 using Millon.TecnicalTest.RealEstate.Common.Api.Extensions;
@@ -24,69 +24,69 @@ using Millon.TecnicalTest.RealEstate.Common.Application.Filtering;
 using Millon.TecnicalTest.RealEstate.Common.Application.Pagining;
 using Millon.TecnicalTest.RealEstate.Common.Domain.Abstractions;
 
-namespace Millon.TecnicalTest.RealEstate.Api.Controllers.Users
+namespace Millon.TecnicalTest.RealEstate.Api.Controllers.Owners
 {
     /// <summary>
-    /// Controller de los endpoints para Usuarios
+    /// Controller de los endpoints para Owners
     /// </summary>
     [ApiVersion("1")]
     [ApiVersion("2")]
     [ApiController]
     [Route("api/v{v:apiVersion}/[controller]")]
-    public class UsuariosController : ControllerBase // ControllerBase is a base class for MVC controller without view support.
+    public class OwnersController : ControllerBase // ControllerBase is a base class for MVC controller without view support.
     {
-        private readonly IUserServices _usuarioServices;
+        private readonly IOwnerServices _ownerServices;
         private readonly IOptions<ApplicationOptions> _applicationOptions;
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="usuarioServices"></param>
-        public UsuariosController(IUserServices usuarioServices, IOptions<ApplicationOptions> applicationOptions)
+        /// <param name="ownerServices"></param>
+        public OwnersController(IOwnerServices ownerServices, IOptions<ApplicationOptions> applicationOptions)
         {
-            _usuarioServices = usuarioServices;
+            _ownerServices = ownerServices;
             _applicationOptions = applicationOptions;
         }
 
         /// <summary>
-        /// Create a new usuario 
+        /// Create a new owner 
         /// </summary>
-        /// <param name="usuarioRequest">Usuario</param>
+        /// <param name="ownerRequest">Owner</param>
         /// <param name="cancellationToken"></param>
-        /// <returns>The new Usuario Created.</returns>
+        /// <returns>The new Owner Created.</returns>
         [MapToApiVersion("1")]
         [HttpPost]
-        [ProducesResponseType(typeof(UserResponse), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(OwnerResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(IEnumerable<DomainError>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> CreateUsuario([FromBody] UserCreateRequest usuarioRequest, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> CreateOwner([FromBody] OwnerCreateRequest ownerRequest, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var result = await _usuarioServices.CreateUsuarioAsync(usuarioRequest, cancellationToken);
+            var result = await _ownerServices.CreateOwnerAsync(ownerRequest, cancellationToken);
 
             return result.Match<IActionResult>(
-                m => CreatedAtAction(nameof(GetUsuario), new { id = m.Id }, m),
+                m => CreatedAtAction(nameof(GetOwner), new { id = m.Id }, m),
                 fail => BadRequest(fail)
                 );
         }
 
         /// <summary>
-        /// Get a single usuario
+        /// Get a single owner
         /// </summary>
-        /// <param name="id">The id Usuario</param>
+        /// <param name="id">The id Owner</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [MapToApiVersion("1")]
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(OwnerResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(DomainError), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetUsuario(string id, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> GetOwner(int id, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var result = await _usuarioServices.SelectUsuarioByIdAsync(id, cancellationToken).ConfigureAwait(false);
+            var result = await _ownerServices.SelectOwnerByIdAsync(id, cancellationToken).ConfigureAwait(false);
 
             return result.Match<IActionResult>(
                 m => Ok(m),
@@ -95,22 +95,22 @@ namespace Millon.TecnicalTest.RealEstate.Api.Controllers.Users
         }
 
         /// <summary>
-        /// Get all usuarios
+        /// Get all owners
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [MapToApiVersion("1")]
         [HttpGet()]
-        [ProducesResponseType(typeof(IEnumerable<UserResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<OwnerResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(DomainError), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetUsuario(CancellationToken cancellationToken = default)
+        public async Task<IActionResult> GetOwner(CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var usuariosResult = await _usuarioServices.SelectAllUsuarios(cancellationToken);
+            var ownersResult = await _ownerServices.SelectAllOwners(cancellationToken);
 
-            return usuariosResult.Match<IActionResult>(
+            return ownersResult.Match<IActionResult>(
                 m => Ok(m),
                 fail => NotFound(fail)
                 );
@@ -123,38 +123,38 @@ namespace Millon.TecnicalTest.RealEstate.Api.Controllers.Users
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [MapToApiVersion("2")]
-        [HttpGet("Paging", Name = "UsuarioPaging")]
-        [ProducesResponseType(typeof(IEnumerable<UserResponse>), StatusCodes.Status200OK)]
+        [HttpGet("Paging", Name = "OwnerPaging")]
+        [ProducesResponseType(typeof(IEnumerable<OwnerResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(DomainError), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ApplicationError), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetPagingUsuario([FromQuery] SearchQueryParameters searchQueryParameters, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> GetPagingOwner([FromQuery] SearchQueryParameters searchQueryParameters, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             if (searchQueryParameters.PageIndex <= 0 || searchQueryParameters.PageSize <= 0)
                 return BadRequest(ApplicationErrors.ValidPropertiesPage(searchQueryParameters.PageIndex, searchQueryParameters.PageSize));
 
-            var usuariosResult = await _usuarioServices.SelectAllUsuarios(searchQueryParameters, cancellationToken);
+            var ownersResult = await _ownerServices.SelectAllOwners(searchQueryParameters, cancellationToken);
 
             // Add pagination metadata to headers
-            var pagedItems = usuariosResult.Match<PagedList<UserResponse>>(
+            var pagedItems = ownersResult.Match<PagedList<OwnerResponse>>(
                 m => m,
                 fail => null
             );
             this.AddPaginationMetadata(pagedItems, searchQueryParameters);
 
-            return usuariosResult.Match<IActionResult>(
+            return ownersResult.Match<IActionResult>(
                 m => Ok(m.Items),
                 fail => NotFound(fail)
                 );
         }
 
         /// <summary>
-        /// Update a usuario
+        /// Update a owner
         /// </summary>
-        /// <param name="id">The Id Usuario</param>
-        /// <param name="usuarioRequest">The new Data Usuario</param>
+        /// <param name="id">The Id Owner</param>
+        /// <param name="ownerRequest">The new Data Owner</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [MapToApiVersion("1")]
@@ -162,11 +162,11 @@ namespace Millon.TecnicalTest.RealEstate.Api.Controllers.Users
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(IEnumerable<DomainError>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> UpdateUsuario(string id, [FromBody] UserUpdateRequest usuarioRequest, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> UpdateOwner(int id, [FromBody] OwnerUpdateRequest ownerRequest, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var result = await _usuarioServices.UpdateAsync(id, usuarioRequest, cancellationToken).ConfigureAwait(false);
+            var result = await _ownerServices.UpdateAsync(id, ownerRequest, cancellationToken).ConfigureAwait(false);
 
             return result.Match<IActionResult>(
                 m => Ok(m),
@@ -175,9 +175,9 @@ namespace Millon.TecnicalTest.RealEstate.Api.Controllers.Users
         }
 
         /// <summary>
-        /// Delete a usuario
+        /// Delete a owner
         /// </summary>
-        /// <param name="id">The Ide Usuario</param>
+        /// <param name="id">The Ide Owner</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [MapToApiVersion("1")]
@@ -185,11 +185,11 @@ namespace Millon.TecnicalTest.RealEstate.Api.Controllers.Users
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(bool), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> DeleteUsuario(string id, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> DeleteOwner(int id, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var result = await _usuarioServices.DeleteUsuarioAsync(id, cancellationToken);
+            var result = await _ownerServices.DeleteOwnerAsync(id, cancellationToken);
 
             return result.Match<IActionResult>(
                 m => Ok(m),

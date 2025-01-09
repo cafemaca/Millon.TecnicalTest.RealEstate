@@ -19,12 +19,12 @@ namespace Millon.TecnicalTest.RealEstate.Data.Repositories
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
-        private readonly CafemacaDbContext _context;
+        private readonly RealEstateDbContext _context;
         private bool disposedValue;
 
 
         // constructor will take the context and logger factory as parameters
-        public UnitOfWork(CafemacaDbContext context)
+        public UnitOfWork(RealEstateDbContext context)
         {
             _context = context;
         }

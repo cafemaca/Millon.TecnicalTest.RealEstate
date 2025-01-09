@@ -50,7 +50,7 @@ namespace Millon.TecnicalTest.RealEstate.Api.Extensions
 
         public static void RegisterDB(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<CafemacaDbContext>((provider, options) =>
+            services.AddDbContext<RealEstateDbContext>((provider, options) =>
             {
                 var interceptor = provider.GetRequiredService<AuditableInterceptor>();
 

@@ -22,9 +22,9 @@ using Millon.TecnicalTest.RealEstate.Domain.Entities.Location;
 
 namespace Millon.TecnicalTest.RealEstate.Data.Repositories.Location
 {
-    public class MunicipioRepository : EntityRepository<Municipio, string, CafemacaDbContext>, IMunicipioRepository
+    public class MunicipioRepository : EntityRepository<Municipio, string, RealEstateDbContext>, IMunicipioRepository
     {
-        public MunicipioRepository(CafemacaDbContext context) : base(context)
+        public MunicipioRepository(RealEstateDbContext context) : base(context)
         {
         }
 

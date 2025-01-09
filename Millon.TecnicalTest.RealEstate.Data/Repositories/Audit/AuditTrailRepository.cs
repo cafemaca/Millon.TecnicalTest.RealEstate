@@ -8,9 +8,9 @@ using Millon.TecnicalTest.RealEstate.Domain.Entities.Audit;
 
 namespace Millon.TecnicalTest.RealEstate.Data.Repositories.Audit
 {
-    public class AuditTrailRepository : EntityRepository<AuditTrail, Guid, CafemacaDbContext>, IAuditTrailRepository
+    public class AuditTrailRepository : EntityRepository<AuditTrail, Guid, RealEstateDbContext>, IAuditTrailRepository
     {
-        public AuditTrailRepository(CafemacaDbContext context) : base(context)
+        public AuditTrailRepository(RealEstateDbContext context) : base(context)
         {
         }
 

@@ -24,7 +24,7 @@ using Millon.TecnicalTest.RealEstate.Domain.Entities.Location;
 
 namespace Millon.TecnicalTest.RealEstate.Data.Cache.Location
 {
-    public class CachedMemoryDepartamentoRepository : GenericCacheRepository<Departamento, string, CafemacaDbContext>, IDepartamentoRepository
+    public class CachedMemoryDepartamentoRepository : GenericCacheRepository<Departamento, string, RealEstateDbContext>, IDepartamentoRepository
     {
         DepartamentoRepository _decorated;
         IDistributedCache _memoryCache;

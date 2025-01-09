@@ -1,10 +1,10 @@
 // ****************************************************************
 //  Assembly         : Millon.TecnicalTest.RealEstate.Data
 //  Author           :  cmalagoncmalagon
-//  Created          : 04-02-2024
+//  Created          : 01-09-2025
 //
 //  Last Modified By : Carlos Fernando Malagón Cano
-//  Last Modified On : 09-20-2024
+//  Last Modified On : 01-09-2025
 //  ****************************************************************
 //  <copyright file="DependecyInjection.cs"
 //      company="Cafemaca - CAFEMACA Colombia">
@@ -16,13 +16,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Repositories;
 using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Repositories.Location;
+using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Repositories.Owners;
 using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Repositories.Users;
 using Millon.TecnicalTest.RealEstate.Common.Application.Interfaces;
 using Millon.TecnicalTest.RealEstate.Data.Cache.Location;
+using Millon.TecnicalTest.RealEstate.Data.Cache.Owners;
 using Millon.TecnicalTest.RealEstate.Data.Cache.User;
 using Millon.TecnicalTest.RealEstate.Data.Repositories;
 using Millon.TecnicalTest.RealEstate.Data.Repositories.Audit;
 using Millon.TecnicalTest.RealEstate.Data.Repositories.Location;
+using Millon.TecnicalTest.RealEstate.Data.Repositories.Owners;
 using Millon.TecnicalTest.RealEstate.Data.Repositories.Users;
 
 namespace Millon.TecnicalTest.RealEstate.Data
@@ -52,6 +55,9 @@ namespace Millon.TecnicalTest.RealEstate.Data
 
             services.AddScoped<UserRepository>();
             services.AddTransient<IUserRepository, CachedMemoryUsuarioRepository>();
+
+            services.AddScoped<OwnerRepository>();
+            services.AddTransient<IOwnerRepository, CachedMemoryOwnerRepository>();
 
             services.AddScoped<IAuditTrailRepository, AuditTrailRepository>();
             return services;

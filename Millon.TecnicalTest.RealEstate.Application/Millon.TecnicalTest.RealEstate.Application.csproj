@@ -53,4 +53,9 @@
     <ProjectReference Include="..\Millon.TecnicalTest.RealEstate.Domain\Millon.TecnicalTest.RealEstate.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\Dtos\Properties\" />
+    <Folder Include="Common\Interfaces\Repositories\Properties\" />
+  </ItemGroup>
+
 </Project>

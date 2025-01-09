@@ -1,12 +1,12 @@
 ﻿// ****************************************************************
 //  Assembly         : Millon.TecnicalTest.RealEstate.Data
 //  Author           :  Carlos Fernando Malagón Cano
-//  Created          : 03-20-2024
+//  Created          : 01-09-2025
 //
 //  Last Modified By : Carlos Fernando Malagón Cano
-//  Last Modified On : 09-19-2024
+//  Last Modified On : 01-09-2025
 //  ****************************************************************
-//  <copyright file="ApplicationDbContext.cs"
+//  <copyright file="RealStateDbContext.cs"
 //      company="Cafemaca - CAFEMACA Colombia">
 //      Cafemaca - CAFEMACA Colombia
 //  </copyright>
@@ -18,10 +18,12 @@ using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Services;
 using Millon.TecnicalTest.RealEstate.Common.Domain.Interfaces;
 using Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations;
 using Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations.Location;
+using Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations.Owners;
 using Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations.Users;
 using Millon.TecnicalTest.RealEstate.Domain.Common.Enums;
 using Millon.TecnicalTest.RealEstate.Domain.Entities.Audit;
 using Millon.TecnicalTest.RealEstate.Domain.Entities.Location;
+using Millon.TecnicalTest.RealEstate.Domain.Entities.Owners;
 using Millon.TecnicalTest.RealEstate.Domain.Entities.Users;
 
 namespace Millon.TecnicalTest.RealEstate.Data.Context
@@ -30,7 +32,7 @@ namespace Millon.TecnicalTest.RealEstate.Data.Context
     /// Clase que define el DbContext de la aplicacion.
     /// </summary>
     /// <param name="options">Opciones de la configuracion.</param>
-    public class CafemacaDbContext : DbContext
+    public class RealEstateDbContext : DbContext
     {
         private readonly ICurrentSessionProvider _currentSessionProvider;
 
@@ -40,10 +42,12 @@ namespace Millon.TecnicalTest.RealEstate.Data.Context
         public DbSet<Municipio> Municipios { get; set; } = default!;
         public DbSet<Usuario> Usuarios { get; set; } = default!;
 
+        public DbSet<Owner> Owners { get; set; } = default!;
+
         public DbSet<AuditTrail> AuditTrails { get; set; } = default!;
         #endregion
 
-        public CafemacaDbContext(DbContextOptions<CafemacaDbContext> options,
+        public RealEstateDbContext(DbContextOptions<RealEstateDbContext> options,
             ICurrentSessionProvider currentSessionProvider) : base(options)
         {
             _currentSessionProvider = currentSessionProvider;
@@ -58,6 +62,8 @@ namespace Millon.TecnicalTest.RealEstate.Data.Context
             modelBuilder.ApplyConfiguration(new DepartamentoConfiguration());
             modelBuilder.ApplyConfiguration(new MunicipioConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+
+            modelBuilder.ApplyConfiguration(new OwnerConfiguration());
 
 
             modelBuilder.ApplyConfiguration(new AuditTrailConfiguration());

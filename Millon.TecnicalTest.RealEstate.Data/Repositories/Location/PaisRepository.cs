@@ -22,9 +22,9 @@ using Millon.TecnicalTest.RealEstate.Domain.Entities.Location;
 
 namespace Millon.TecnicalTest.RealEstate.Data.Repositories.Location
 {
-    public class PaisRepository : EntityRepository<Pais, string, CafemacaDbContext>, IPaisRepository
+    public class PaisRepository : EntityRepository<Pais, string, RealEstateDbContext>, IPaisRepository
     {
-        public PaisRepository(CafemacaDbContext context) : base(context)
+        public PaisRepository(RealEstateDbContext context) : base(context)
         {
         }
 

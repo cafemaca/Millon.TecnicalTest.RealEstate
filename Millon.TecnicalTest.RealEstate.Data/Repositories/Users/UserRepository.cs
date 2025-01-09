@@ -22,9 +22,9 @@ using Millon.TecnicalTest.RealEstate.Domain.Entities.Users;
 
 namespace Millon.TecnicalTest.RealEstate.Data.Repositories.Users
 {
-    public class UserRepository : EntityRepository<Usuario, string, CafemacaDbContext>, IUserRepository
+    public class UserRepository : EntityRepository<Usuario, string, RealEstateDbContext>, IUserRepository
     {
-        public UserRepository(CafemacaDbContext context) : base(context)
+        public UserRepository(RealEstateDbContext context) : base(context)
         {
         }
 

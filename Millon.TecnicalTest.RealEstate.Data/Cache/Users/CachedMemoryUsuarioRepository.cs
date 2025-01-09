@@ -24,7 +24,7 @@ using Millon.TecnicalTest.RealEstate.Domain.Entities.Users;
 
 namespace Millon.TecnicalTest.RealEstate.Data.Cache.User
 {
-    public class CachedMemoryUsuarioRepository : GenericCacheRepository<Usuario, string, CafemacaDbContext>, IUserRepository
+    public class CachedMemoryUsuarioRepository : GenericCacheRepository<Usuario, string, RealEstateDbContext>, IUserRepository
     {
         UserRepository _decorated;
         IDistributedCache _memoryCache;

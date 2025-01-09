@@ -1,10 +1,10 @@
 ﻿// ****************************************************************
 //  Assembly         : Millon.TecnicalTest.RealEstate.Data
 //  Author           :  Carlos Fernando Malagón Cano
-//  Created          : 11-10-2024
+//  Created          : 01-09-2025
 //
 //  Last Modified By : Carlos Fernando Malagón Cano
-//  Last Modified On : 11-10-2024
+//  Last Modified On : 01-09-2025
 //  ****************************************************************
 //  <copyright file="ApplicationDbContext.cs"
 //      company="Cafemaca - CAFEMACA Colombia">
@@ -12,26 +12,27 @@
 //  </copyright>
 //
 
-using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Repositories.Location;
+
+using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Repositories.Owners;
 using Millon.TecnicalTest.RealEstate.Application.Common.SpecificationQueries;
 using Millon.TecnicalTest.RealEstate.Common.Application.Interfaces;
 using Millon.TecnicalTest.RealEstate.Common.Application.Pagining;
 using Millon.TecnicalTest.RealEstate.Common.Data.Repositories;
 using Millon.TecnicalTest.RealEstate.Data.Context;
-using Millon.TecnicalTest.RealEstate.Domain.Entities.Location;
+using Millon.TecnicalTest.RealEstate.Domain.Entities.Owners;
 
-namespace Millon.TecnicalTest.RealEstate.Data.Repositories.Location
+namespace Millon.TecnicalTest.RealEstate.Data.Repositories.Owners
 {
-    public class DepartamentoRepository : EntityRepository<Departamento, string, RealEstateDbContext>, IDepartamentoRepository
+    public class OwnerRepository : EntityRepository<Owner, int, RealEstateDbContext>, IOwnerRepository
     {
-        public DepartamentoRepository(RealEstateDbContext context) : base(context)
+        public OwnerRepository(RealEstateDbContext context) : base(context)
         {
         }
 
-        public async Task<PagedList<Departamento>> GetAllAsync(ISpecificationQuery<Departamento> specification, int pageIndex, int pageSize, CancellationToken cancellationToken)
+        public async Task<PagedList<Owner>> GetAllAsync(ISpecificationQuery<Owner> specification, int pageIndex, int pageSize, CancellationToken cancellationToken)
         {
 
-            return await PagedList<Departamento>.CreateAsync(SpecificationQueryBuilder.GetQuery(_dbSet, specification).AsQueryable<Departamento>(), pageIndex, pageSize);
+            return await PagedList<Owner>.CreateAsync(SpecificationQueryBuilder.GetQuery(_dbSet, specification).AsQueryable<Owner>(), pageIndex, pageSize);
         }
     }
 }
