@@ -31,6 +31,11 @@ namespace Millon.TecnicalTest.RealEstate.Domain.Entities.Properties
         public int IdOwner { get; set; }
         public Owner Owner { get; set; }
 
+
+        public ICollection<PropertyImage> Images { get; set; }
+        public ICollection<PropertyTrace> Traces { get; set; }
+
+
         #region Auditable Entity
         public DateTime CreatedAtUtc { get; set; }
         public DateTime? UpdatedAtUtc { get; set; }

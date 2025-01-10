@@ -4,7 +4,7 @@
 //  Created          : 01-09-2025
 //
 //  Last Modified By : Carlos Fernando Malagón Cano
-//  Last Modified On : 01-09-2025
+//  Last Modified On : 01-10-2025
 //  ****************************************************************
 //  <copyright file="RealStateDbContext.cs"
 //      company="Cafemaca - CAFEMACA Colombia">
@@ -19,11 +19,13 @@ using Millon.TecnicalTest.RealEstate.Common.Domain.Interfaces;
 using Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations;
 using Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations.Location;
 using Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations.Owners;
+using Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations.Properties;
 using Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations.Users;
 using Millon.TecnicalTest.RealEstate.Domain.Common.Enums;
 using Millon.TecnicalTest.RealEstate.Domain.Entities.Audit;
 using Millon.TecnicalTest.RealEstate.Domain.Entities.Location;
 using Millon.TecnicalTest.RealEstate.Domain.Entities.Owners;
+using Millon.TecnicalTest.RealEstate.Domain.Entities.Properties;
 using Millon.TecnicalTest.RealEstate.Domain.Entities.Users;
 
 namespace Millon.TecnicalTest.RealEstate.Data.Context
@@ -43,6 +45,7 @@ namespace Millon.TecnicalTest.RealEstate.Data.Context
         public DbSet<Usuario> Usuarios { get; set; } = default!;
 
         public DbSet<Owner> Owners { get; set; } = default!;
+        public DbSet<Property> Properties { get; set; } = default!;
 
         public DbSet<AuditTrail> AuditTrails { get; set; } = default!;
         #endregion
@@ -64,6 +67,9 @@ namespace Millon.TecnicalTest.RealEstate.Data.Context
             modelBuilder.ApplyConfiguration(new UserConfiguration());
 
             modelBuilder.ApplyConfiguration(new OwnerConfiguration());
+            modelBuilder.ApplyConfiguration(new PropertyConfiguration());
+            modelBuilder.ApplyConfiguration(new PropertyImageConfiguration());
+            modelBuilder.ApplyConfiguration(new PropertyTraceConfiguration());
 
 
             modelBuilder.ApplyConfiguration(new AuditTrailConfiguration());

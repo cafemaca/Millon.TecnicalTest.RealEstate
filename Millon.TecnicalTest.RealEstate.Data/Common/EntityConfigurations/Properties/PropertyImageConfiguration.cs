@@ -1,12 +1,12 @@
 ﻿// ****************************************************************
 //  Assembly         : Millon.TecnicalTest.RealEstate.Data
 //  Author           :  Carlos Fernando Malagón Cano
-//  Created          : 01-09-2025
+//  Created          : 11-10-2024
 //
 //  Last Modified By : Carlos Fernando Malagón Cano
-//  Last Modified On : 01-10-2025
+//  Last Modified On : 11-10-2024
 //  ****************************************************************
-//  <copyright file="OwnerConfiguration.cs"
+//  <copyright file="ApplicationDbContext.cs"
 //      company="Cafemaca - CAFEMACA Colombia">
 //      Cafemaca - CAFEMACA Colombia
 //  </copyright>
@@ -16,34 +16,27 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Millon.TecnicalTest.RealEstate.Domain.Common.ModelConstants;
-using Millon.TecnicalTest.RealEstate.Domain.Entities.Owners;
+using Millon.TecnicalTest.RealEstate.Domain.Entities.Properties;
 
-namespace Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations.Owners
+namespace Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations.Properties
 {
-    public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
+    public class PropertyImageConfiguration : IEntityTypeConfiguration<PropertyImage>
     {
-        public void Configure(EntityTypeBuilder<Owner> builder)
+        public void Configure(EntityTypeBuilder<PropertyImage> builder)
         {
 
-            builder.ToTable(nameof(Owner));
+            builder.ToTable(nameof(PropertyImage));
 
             builder.Property(x => x.Id)
                 .IsRequired();
 
-            builder.Property(p => p.Name)
-                .HasMaxLength(OwnerModelConstants.OwnerConstants.MaxNameLength)
+            builder.Property(p => p.File)
+                .HasMaxLength(PropertyModelConstants.Property.MaxNameLength)
                 .IsRequired();
 
-            builder.Property(p => p.Address)
-                .HasMaxLength(OwnerModelConstants.OwnerConstants.MaxAddressLength)
+            builder.Property(p => p.Enabled)
                 .IsRequired();
 
-            builder.Property(p => p.Photo)
-                .HasMaxLength(OwnerModelConstants.OwnerConstants.MaxPhotoLength)
-                .IsRequired();
-
-            builder.Property(p => p.Birthday)
-                .IsRequired();
 
             builder.Property(p => p.CreatedAtUtc)
                 .IsRequired();
@@ -58,6 +51,11 @@ namespace Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations.Owners
                 .HasMaxLength(500);
 
             builder.HasKey(p => p.Id);
+            builder.HasOne(e => e.Property)
+                .WithMany(e => e.Images)
+                .HasForeignKey(e => e.IdProperty)
+                .IsRequired();
         }
     }
+
 }

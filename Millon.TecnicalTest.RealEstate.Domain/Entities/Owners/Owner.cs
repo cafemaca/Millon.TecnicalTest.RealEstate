@@ -13,6 +13,7 @@
 
 using Millon.TecnicalTest.RealEstate.Common.Domain.Abstractions;
 using Millon.TecnicalTest.RealEstate.Common.Domain.Interfaces;
+using Millon.TecnicalTest.RealEstate.Domain.Entities.Properties;
 
 namespace Millon.TecnicalTest.RealEstate.Domain.Entities.Owners
 {
@@ -25,6 +26,8 @@ namespace Millon.TecnicalTest.RealEstate.Domain.Entities.Owners
         public string Address { get; set; } = string.Empty;
         public string Photo { get; set; } = string.Empty;
         public DateOnly Birthday { get; set; }
+
+        public ICollection<Property> Properties { get; set; }
 
         #region Auditable Entity
         public DateTime CreatedAtUtc { get; set; }

@@ -23,6 +23,7 @@ namespace Millon.TecnicalTest.RealEstate.Domain.Entities.Properties
     {
         public string File { get; set; } = string.Empty;
         public bool Enabled { get; set; }
+        
         public int IdProperty { get; set; }
         public Property Property { get; set; }
 
