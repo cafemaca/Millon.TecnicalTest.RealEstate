@@ -23,8 +23,8 @@ namespace Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Services.
 {
     public interface IPropertyServices
     {
-        Task<Result<IEnumerable<PropertyResponse>, DomainError>> SelectAllPropertys(CancellationToken cancellationToken);
-        Task<Result<PagedList<PropertyResponse>, DomainError>> SelectAllPropertys(SearchQueryParameters searchQueryParameters, CancellationToken cancellationToken);
+        Task<Result<IEnumerable<PropertyResponse>, DomainError>> SelectAllProperties(CancellationToken cancellationToken);
+        Task<Result<PagedList<PropertyResponse>, DomainError>> SelectAllProperties(SearchQueryParameters searchQueryParameters, CancellationToken cancellationToken);
         Task<Result<PropertyResponse?, DomainError>> SelectPropertyByIdAsync(int id, CancellationToken cancellationToken);
 
         Task<Result<PropertyResponse?, IEnumerable<DomainError>>> CreatePropertyAsync(PropertyCreateRequest ownerRequest, CancellationToken cancellationToken);

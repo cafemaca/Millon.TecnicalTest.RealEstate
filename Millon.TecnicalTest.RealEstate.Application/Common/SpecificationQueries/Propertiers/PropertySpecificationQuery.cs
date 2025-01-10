@@ -24,16 +24,20 @@ namespace Millon.TecnicalTest.RealEstate.Application.Common.SpecificationQueries
     {
         public PropertySpecificationQuery() : base()
         {
-
+            AddInclude(b => b.Images);
+            AddInclude(b => b.Traces);
         }
 
         public PropertySpecificationQuery(int id) : base(b => b.Id == id)
         {
-
+            AddInclude(b => b.Images);
+            AddInclude(b => b.Traces);
         }
 
         public PropertySpecificationQuery(Expression<Func<Property, bool>> criteria, List<SpecificationSort<Property>> orderby) : base(criteria)
         {
+            AddInclude(b => b.Images);
+            AddInclude(b => b.Traces);
             OrderBy = orderby;
         }
     }

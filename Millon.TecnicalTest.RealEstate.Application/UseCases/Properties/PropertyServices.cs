@@ -90,13 +90,13 @@ namespace Millon.TecnicalTest.RealEstate.Application.UseCases.Properties
             }
         }
 
-        public async Task<Result<IEnumerable<PropertyResponse>, DomainError>> SelectAllPropertys(CancellationToken cancellationToken)
+        public async Task<Result<IEnumerable<PropertyResponse>, DomainError>> SelectAllProperties(CancellationToken cancellationToken)
         {
             var propertys = (await _propertyRepository.GetAllAsync(new PropertySpecificationQuery(), cancellationToken).ConfigureAwait(false)).ToList();
             return _mapper.Map<List<PropertyResponse>>(propertys);
         }
 
-        public async Task<Result<PagedList<PropertyResponse>, DomainError>> SelectAllPropertys(SearchQueryParameters searchQueryParameters, CancellationToken cancellationToken)
+        public async Task<Result<PagedList<PropertyResponse>, DomainError>> SelectAllProperties(SearchQueryParameters searchQueryParameters, CancellationToken cancellationToken)
         {
             #region Search filters
             List<ColumnFilter> columnFilters = CustomExpressionFilter<Property>.GetColumnFilters(searchQueryParameters.ColumnFilters);

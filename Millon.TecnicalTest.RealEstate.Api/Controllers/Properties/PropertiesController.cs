@@ -27,7 +27,7 @@ using Millon.TecnicalTest.RealEstate.Common.Domain.Abstractions;
 namespace Millon.TecnicalTest.RealEstate.Api.Controllers.Properties
 {
     /// <summary>
-    /// Controller de los endpoints para Propertys
+    /// Controller de los endpoints para Properties
     /// </summary>
     [ApiVersion("1")]
     [ApiVersion("2")]
@@ -108,7 +108,7 @@ namespace Millon.TecnicalTest.RealEstate.Api.Controllers.Properties
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var propertysResult = await _propertyServices.SelectAllPropertys(cancellationToken);
+            var propertysResult = await _propertyServices.SelectAllProperties(cancellationToken);
 
             return propertysResult.Match<IActionResult>(
                 m => Ok(m),
@@ -135,7 +135,7 @@ namespace Millon.TecnicalTest.RealEstate.Api.Controllers.Properties
             if (searchQueryParameters.PageIndex <= 0 || searchQueryParameters.PageSize <= 0)
                 return BadRequest(ApplicationErrors.ValidPropertiesPage(searchQueryParameters.PageIndex, searchQueryParameters.PageSize));
 
-            var propertysResult = await _propertyServices.SelectAllPropertys(searchQueryParameters, cancellationToken);
+            var propertysResult = await _propertyServices.SelectAllProperties(searchQueryParameters, cancellationToken);
 
             // Add pagination metadata to headers
             var pagedItems = propertysResult.Match<PagedList<PropertyResponse>>(
