@@ -20,7 +20,7 @@ namespace Millon.TecnicalTest.RealEstate.Domain.Common.ModelConstants
     /// </summary>
     public class OwnerModelConstants
     {
-        public class Owner
+        public class OwnerConstants
         {
             public const int MinNameLength = 2;
             public const int MaxNameLength = 100;

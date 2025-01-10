@@ -24,9 +24,9 @@ namespace Millon.TecnicalTest.RealEstate.Domain.Common.Errors.Owners
         public static readonly DomainError RequiredName = new("Owner.RequiredName", "Required Name");
         public static readonly DomainError RequiredAdress = new("Owner.RequiredAdress", "Required Adress");
         public static readonly DomainError RequiredPhoto = new("Owner.RequiredPhone", "Required Photo");
-        public static readonly DomainError ValidName = new("Owner.ValidName", $"Name length should between {OwnerModelConstants.Owner.MinNameLength} to {OwnerModelConstants.Owner.MaxNameLength}");
-        public static readonly DomainError ValidAdress = new("Owner.ValidAdress", $"Adress length should between {OwnerModelConstants.Owner.MinAddressLength} to {OwnerModelConstants.Owner.MaxAddressLength}");
-        public static readonly DomainError ValidPhoto = new("Owner.ValidPhoto", $"Name length should between {OwnerModelConstants.Owner.MinPhotoLength} to {OwnerModelConstants.Owner.MaxPhotoLength}");
+        public static readonly DomainError ValidName = new("Owner.ValidName", $"Name length should between {OwnerModelConstants.OwnerConstants.MinNameLength} to {OwnerModelConstants.OwnerConstants.MaxNameLength}");
+        public static readonly DomainError ValidAdress = new("Owner.ValidAdress", $"Adress length should between {OwnerModelConstants.OwnerConstants.MinAddressLength} to {OwnerModelConstants.OwnerConstants.MaxAddressLength}");
+        public static readonly DomainError ValidPhoto = new("Owner.ValidPhoto", $"Name length should between {OwnerModelConstants.OwnerConstants.MinPhotoLength} to {OwnerModelConstants.OwnerConstants.MaxPhotoLength}");
         public static readonly DomainError RequiredBirthday = new("Owner.RequiredBirthday", "Required Birth Day");
         #endregion
 

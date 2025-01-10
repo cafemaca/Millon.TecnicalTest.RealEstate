@@ -31,15 +31,15 @@ namespace Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations.Owners
                 .IsRequired();
 
             builder.Property(p => p.Name)
-                .HasMaxLength(OwnerModelConstants.Owner.MaxNameLength)
+                .HasMaxLength(OwnerModelConstants.OwnerConstants.MaxNameLength)
                 .IsRequired();
 
             builder.Property(p => p.Address)
-                .HasMaxLength(OwnerModelConstants.Owner.MaxAddressLength)
+                .HasMaxLength(OwnerModelConstants.OwnerConstants.MaxAddressLength)
                 .IsRequired();
 
             builder.Property(p => p.Photo)
-                .HasMaxLength(OwnerModelConstants.Owner.MaxPhotoLength)
+                .HasMaxLength(OwnerModelConstants.OwnerConstants.MaxPhotoLength)
                 .IsRequired();
 
             builder.Property(p => p.Birthday)
