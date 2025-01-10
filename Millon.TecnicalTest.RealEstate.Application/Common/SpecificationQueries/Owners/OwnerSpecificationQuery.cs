@@ -26,7 +26,7 @@ namespace Millon.TecnicalTest.RealEstate.Application.Common.SpecificationQueries
 
         }
 
-        public OwnerSpecificationQuery(int id) : base()
+        public OwnerSpecificationQuery(int id) : base(b => b.Id == id)
         {
 
         }

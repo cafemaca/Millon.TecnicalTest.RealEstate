@@ -24,5 +24,8 @@ namespace Millon.TecnicalTest.RealEstate.Application.Common.Dtos.Properties
         public int Year { get; set; }
 
         public int IdOwner { get; set; }
+
+        public ICollection<PropertyImageCreateRequest> Images { get; set; }
+        public ICollection<PropertyTraceCreateRequest> Traces { get; set; }
     }
 }
