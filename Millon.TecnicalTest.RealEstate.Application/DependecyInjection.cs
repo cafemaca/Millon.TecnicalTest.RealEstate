@@ -17,6 +17,7 @@ using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Millon.TecnicalTest.RealEstate.Application.Common.Dtos.Location;
 using Millon.TecnicalTest.RealEstate.Application.Common.Dtos.Owners;
+using Millon.TecnicalTest.RealEstate.Application.Common.Dtos.Properties;
 using Millon.TecnicalTest.RealEstate.Application.Common.Dtos.Users;
 using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Services;
 using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Services.Location;
@@ -25,6 +26,7 @@ using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Services.User
 using Millon.TecnicalTest.RealEstate.Application.Common.Profiles;
 using Millon.TecnicalTest.RealEstate.Application.Common.Validators.Location;
 using Millon.TecnicalTest.RealEstate.Application.Common.Validators.Owners;
+using Millon.TecnicalTest.RealEstate.Application.Common.Validators.Properties;
 using Millon.TecnicalTest.RealEstate.Application.Common.Validators.Users;
 using Millon.TecnicalTest.RealEstate.Application.UseCases.Audit;
 using Millon.TecnicalTest.RealEstate.Application.UseCases.Location;
@@ -54,6 +56,9 @@ namespace Millon.TecnicalTest.RealEstate.Application
 
             services.AddTransient<IValidator<OwnerCreateRequest>, OwnerCreateRequestValidator>();
             services.AddTransient<IValidator<OwnerUpdateRequest>, OwnerUpdateRequestValidator>();
+
+            services.AddTransient<IValidator<PropertyCreateRequest>, PropertyCreateRequestValidator>();
+            services.AddTransient<IValidator<PropertyUpdateRequest>, PropertyUpdateRequestValidator>();
 
             #endregion
 

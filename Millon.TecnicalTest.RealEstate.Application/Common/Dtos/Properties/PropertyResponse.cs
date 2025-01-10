@@ -13,9 +13,24 @@
 //
 
 
+using Millon.TecnicalTest.RealEstate.Application.Common.Dtos.Owners;
+using Millon.TecnicalTest.RealEstate.Domain.Entities.Owners;
+
 namespace Millon.TecnicalTest.RealEstate.Application.Common.Dtos.Properties
 {
     public class PropertyResponse
     {
+        public string Name { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
+        public double Price { get; set; }
+        public string CodeInternal { get; set; } = string.Empty;
+        public int Year { get; set; }
+
+        public int IdOwner { get; set; }
+        public OwnerResponse Owner { get; set; }
+
+
+        public ICollection<PropertyImageResponse> Images { get; set; }
+        public ICollection<PropertyTraceResponse> Traces { get; set; }
     }
 }

@@ -6,7 +6,7 @@
 //  Last Modified By : Carlos Fernando Malagón Cano
 //  Last Modified On : 01-10-2025
 //  ****************************************************************
-//  <copyright file="PropertyUpdateRequest.cs"
+//  <copyright file="PropertyTraceCreateRequest.cs"
 //      company="Cafemaca - CAFEMACA Colombia">
 //      Cafemaca - CAFEMACA Colombia
 //  </copyright>
@@ -15,14 +15,11 @@
 
 namespace Millon.TecnicalTest.RealEstate.Application.Common.Dtos.Properties
 {
-    public class PropertyUpdateRequest
+    public class PropertyTraceCreateRequest
     {
+        public DateOnly DateSale { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string Address { get; set; } = string.Empty;
-        public double Price { get; set; }
-        public string CodeInternal { get; set; } = string.Empty;
-        public int Year { get; set; }
-
-        public int IdOwner { get; set; }
+        public double Value { get; set; }
+        public double Tax { get; set; }
     }
 }
