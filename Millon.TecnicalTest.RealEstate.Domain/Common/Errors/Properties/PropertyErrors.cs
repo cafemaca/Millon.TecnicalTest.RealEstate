@@ -32,7 +32,7 @@ namespace Millon.TecnicalTest.RealEstate.Domain.Common.Errors.Properties
 
         #region Bussines Errors
         public static DomainError ValidPrice(double price) => new("Property.Price", $"The property price must be greater than {price}");
-        public static DomainError NotFound(string id) => new("Property.NotFound", $"The Property with Id '{id}' was not found");
+        public static DomainError NotFound(int id) => new("Property.NotFound", $"The Property with Id '{id}' was not found");
         #endregion
     }
 }

@@ -38,35 +38,35 @@ namespace Millon.TecnicalTest.RealEstate.Application.UseCases.Owners
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IOwnerRepository _usuarioRepository;
+        private readonly IOwnerRepository _ownerRepository;
         private readonly IValidator<OwnerCreateRequest> _createValidator;
         private readonly IValidator<OwnerUpdateRequest> _updateValidator;
 
         public OwnerServices(ILogger<OwnerServices> logger
             , IMapper mapper
             , IUnitOfWork unitOfWork
-            , IOwnerRepository usuarioRepository
+            , IOwnerRepository ownerRepository
             , IValidator<OwnerCreateRequest> createValidator
             , IValidator<OwnerUpdateRequest> updateValidator)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
-            _usuarioRepository = usuarioRepository ?? throw new ArgumentNullException(nameof(usuarioRepository));
+            _ownerRepository = ownerRepository ?? throw new ArgumentNullException(nameof(ownerRepository));
             _createValidator = createValidator;
             _updateValidator = updateValidator;
         }
 
-        public async Task<Result<OwnerResponse?, IEnumerable<DomainError>>> CreateOwnerAsync(OwnerCreateRequest usuarioRequest, CancellationToken cancellationToken)
+        public async Task<Result<OwnerResponse?, IEnumerable<DomainError>>> CreateOwnerAsync(OwnerCreateRequest ownerRequest, CancellationToken cancellationToken)
         {
-            ValidationResult result = await _createValidator.ValidateAsync(usuarioRequest, cancellationToken).ConfigureAwait(false);
+            ValidationResult result = await _createValidator.ValidateAsync(ownerRequest, cancellationToken).ConfigureAwait(false);
             if (result.IsValid)
             {
-                Owner usuario = _mapper.Map<Owner>(usuarioRequest);
+                Owner owner = _mapper.Map<Owner>(ownerRequest);
 
-                await _usuarioRepository.InsertAsync(usuario, cancellationToken).ConfigureAwait(false);
+                await _ownerRepository.InsertAsync(owner, cancellationToken).ConfigureAwait(false);
                 await _unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false); // save the changes to the database
 
-                return _mapper.Map<OwnerResponse>(usuario);
+                return _mapper.Map<OwnerResponse>(owner);
             }
             else
             {
@@ -76,10 +76,10 @@ namespace Millon.TecnicalTest.RealEstate.Application.UseCases.Owners
 
         public async Task<Result<bool, DomainError>> DeleteOwnerAsync(int id, CancellationToken cancellationToken)
         {
-            Owner? usuario = await _usuarioRepository.GetAsync(id, cancellationToken).ConfigureAwait(false);
-            if (usuario != null)
+            Owner? owner = await _ownerRepository.GetAsync(id, cancellationToken).ConfigureAwait(false);
+            if (owner != null)
             {
-                await _usuarioRepository.DeleteAsync(id, cancellationToken).ConfigureAwait(false);
+                await _ownerRepository.DeleteAsync(id, cancellationToken).ConfigureAwait(false);
                 await _unitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
                 return true;
@@ -92,8 +92,8 @@ namespace Millon.TecnicalTest.RealEstate.Application.UseCases.Owners
 
         public async Task<Result<IEnumerable<OwnerResponse>, DomainError>> SelectAllOwners(CancellationToken cancellationToken)
         {
-            var usuarios = (await _usuarioRepository.GetAllAsync(new OwnerSpecificationQuery(), cancellationToken).ConfigureAwait(false)).ToList();
-            return _mapper.Map<List<OwnerResponse>>(usuarios);
+            var owners = (await _ownerRepository.GetAllAsync(new OwnerSpecificationQuery(), cancellationToken).ConfigureAwait(false)).ToList();
+            return _mapper.Map<List<OwnerResponse>>(owners);
         }
 
         public async Task<Result<PagedList<OwnerResponse>, DomainError>> SelectAllOwners(SearchQueryParameters searchQueryParameters, CancellationToken cancellationToken)
@@ -124,16 +124,16 @@ namespace Millon.TecnicalTest.RealEstate.Application.UseCases.Owners
                 sorts = CustomExpressionFilter<Owner>.CustomSort(columnSorting);
             }
 
-            PagedList<Owner> usuarios = (await _usuarioRepository.GetAllAsync(new OwnerSpecificationQuery(filters, sorts), searchQueryParameters.PageIndex, searchQueryParameters.PageSize, cancellationToken));
-            return _mapper.Map<PagedList<OwnerResponse>>(usuarios);
+            PagedList<Owner> owners = (await _ownerRepository.GetAllAsync(new OwnerSpecificationQuery(filters, sorts), searchQueryParameters.PageIndex, searchQueryParameters.PageSize, cancellationToken));
+            return _mapper.Map<PagedList<OwnerResponse>>(owners);
         }
 
         public async Task<Result<OwnerResponse?, DomainError>> SelectOwnerByIdAsync(int id, CancellationToken cancellationToken)
         {
-            Owner? usuario = await _usuarioRepository.FirstOrDefaultAsync(new OwnerSpecificationQuery(id), cancellationToken).ConfigureAwait(false);
-            if (usuario != null)
+            Owner? owner = await _ownerRepository.FirstOrDefaultAsync(new OwnerSpecificationQuery(id), cancellationToken).ConfigureAwait(false);
+            if (owner != null)
             {
-                return _mapper.Map<OwnerResponse>(usuario);
+                return _mapper.Map<OwnerResponse>(owner);
             }
             else
             {
@@ -141,18 +141,18 @@ namespace Millon.TecnicalTest.RealEstate.Application.UseCases.Owners
             }
         }
 
-        public async Task<Result<bool, IEnumerable<DomainError>>> UpdateAsync(int id, OwnerUpdateRequest usuarioRequest, CancellationToken cancellationToken)
+        public async Task<Result<bool, IEnumerable<DomainError>>> UpdateAsync(int id, OwnerUpdateRequest ownerRequest, CancellationToken cancellationToken)
         {
-            ValidationResult result = await _updateValidator.ValidateAsync(usuarioRequest, cancellationToken).ConfigureAwait(false);
+            ValidationResult result = await _updateValidator.ValidateAsync(ownerRequest, cancellationToken).ConfigureAwait(false);
             if (result.IsValid)
             {
-                Owner? usuario = await _usuarioRepository.GetAsync(id, cancellationToken).ConfigureAwait(false);
-                if (usuario != null)
+                Owner? owner = await _ownerRepository.GetAsync(id, cancellationToken).ConfigureAwait(false);
+                if (owner != null)
                 {
-                    _mapper.Map<OwnerUpdateRequest, Owner>(usuarioRequest, usuario);
-                    usuario.Id = id;
+                    _mapper.Map<OwnerUpdateRequest, Owner>(ownerRequest, owner);
+                    owner.Id = id;
 
-                    await _usuarioRepository.UpdateAsync(usuario, cancellationToken).ConfigureAwait(false);
+                    await _ownerRepository.UpdateAsync(owner, cancellationToken).ConfigureAwait(false);
                     await _unitOfWork.SaveChangesAsync(cancellationToken);
 
                     return true;

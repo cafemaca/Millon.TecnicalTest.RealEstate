@@ -22,6 +22,7 @@ using Millon.TecnicalTest.RealEstate.Application.Common.Dtos.Users;
 using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Services;
 using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Services.Location;
 using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Services.Owner;
+using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Services.Properties;
 using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Services.Users;
 using Millon.TecnicalTest.RealEstate.Application.Common.Profiles;
 using Millon.TecnicalTest.RealEstate.Application.Common.Validators.Location;
@@ -31,6 +32,7 @@ using Millon.TecnicalTest.RealEstate.Application.Common.Validators.Users;
 using Millon.TecnicalTest.RealEstate.Application.UseCases.Audit;
 using Millon.TecnicalTest.RealEstate.Application.UseCases.Location;
 using Millon.TecnicalTest.RealEstate.Application.UseCases.Owners;
+using Millon.TecnicalTest.RealEstate.Application.UseCases.Properties;
 using Millon.TecnicalTest.RealEstate.Application.UseCases.Users;
 using Millon.TecnicalTest.RealEstatea.Application.UseCases.Location;
 
@@ -72,6 +74,7 @@ namespace Millon.TecnicalTest.RealEstate.Application
             services.AddScoped<IUserServices, UsuarioServices>();
 
             services.AddScoped<IOwnerServices, OwnerServices>();
+            services.AddScoped<IPropertyServices, PropertyServices>();
 
             services.AddScoped<IAuditTrailServices, AuditTrailServices>();
             #endregion
