@@ -13,13 +13,13 @@ A large real estate company needs to create an API to obtain information about p
 
 ## Presentation
 The presentation of the solution is done through Swagger, which has the endpoints of the requested requirements:
-* Create property building
-* Add image from property
-* Change price
-* Update property
+### Create property building
+### Add image from property
+### Change price
+### Update property
   
-###List property with filters
-This requirement is developed in the endpoint /api/v1/Properties/Paging where the parameters are developed like this:
+### List property with filters
+This requirement is developed in the endpoint `/api/v1/Properties/Paging` where the parameters are developed like this:
 
 ### Data Base
 La base de datos construída para la solución a nivel de tablas, se presenta el siguiente modelo enitdad/relación:
