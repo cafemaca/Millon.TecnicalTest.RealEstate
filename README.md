@@ -5,11 +5,11 @@ The purpose of this project is to carry out the technical test proposed by MILLO
 ## Description
 
 A large real estate company needs to create an API to obtain information about properties in United States, this is in a database as shown in the image, your task is to create a set of services:
-● Create property building
-● Add image from property
-● Change price
-● Update property
-● List property with filters
+Create property building
+Add image from property
+Change price
+Update property
+List property with filters
 
 ## Presentation
 The presentation of the solution is done through Swagger, which has the endpoints of the requested requirements.
