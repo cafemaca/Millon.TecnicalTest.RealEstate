@@ -12,7 +12,6 @@
 //  </copyright>
 //
 
-using System.Reflection;
 using Asp.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -30,6 +29,7 @@ using Millon.TecnicalTest.RealEstate.Data.Common.Interceptors;
 using Millon.TecnicalTest.RealEstate.Data.Context;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
 
 namespace Millon.TecnicalTest.RealEstate.Api.Extensions
 {

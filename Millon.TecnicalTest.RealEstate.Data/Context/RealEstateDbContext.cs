@@ -17,16 +17,12 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Services;
 using Millon.TecnicalTest.RealEstate.Common.Domain.Interfaces;
 using Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations;
-using Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations.Location;
 using Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations.Owners;
 using Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations.Properties;
-using Millon.TecnicalTest.RealEstate.Data.Common.EntityConfigurations.Users;
 using Millon.TecnicalTest.RealEstate.Domain.Common.Enums;
 using Millon.TecnicalTest.RealEstate.Domain.Entities.Audit;
-using Millon.TecnicalTest.RealEstate.Domain.Entities.Location;
 using Millon.TecnicalTest.RealEstate.Domain.Entities.Owners;
 using Millon.TecnicalTest.RealEstate.Domain.Entities.Properties;
-using Millon.TecnicalTest.RealEstate.Domain.Entities.Users;
 
 namespace Millon.TecnicalTest.RealEstate.Data.Context
 {
@@ -39,11 +35,6 @@ namespace Millon.TecnicalTest.RealEstate.Data.Context
         private readonly ICurrentSessionProvider _currentSessionProvider;
 
         #region Definicion de los diferentes DbSet
-        public DbSet<Pais> Paises { get; set; } = default!;
-        public DbSet<Departamento> Departamentos { get; set; } = default!;
-        public DbSet<Municipio> Municipios { get; set; } = default!;
-        public DbSet<Usuario> Usuarios { get; set; } = default!;
-
         public DbSet<Owner> Owners { get; set; } = default!;
         public DbSet<Property> Properties { get; set; } = default!;
 
@@ -60,11 +51,6 @@ namespace Millon.TecnicalTest.RealEstate.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.ApplyConfiguration(new PaisConfiguration());
-            modelBuilder.ApplyConfiguration(new DepartamentoConfiguration());
-            modelBuilder.ApplyConfiguration(new MunicipioConfiguration());
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
 
             modelBuilder.ApplyConfiguration(new OwnerConfiguration());
             modelBuilder.ApplyConfiguration(new PropertyConfiguration());
