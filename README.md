@@ -5,14 +5,21 @@ The purpose of this project is to carry out the technical test proposed by MILLO
 ## Description
 
 A large real estate company needs to create an API to obtain information about properties in United States, this is in a database as shown in the image, your task is to create a set of services:
-Create property building
-Add image from property
-Change price
-Update property
-List property with filters
+* Create property building
+* Add image from property
+* Change price
+* Update property
+* List property with filters
 
 ## Presentation
-The presentation of the solution is done through Swagger, which has the endpoints of the requested requirements.
+The presentation of the solution is done through Swagger, which has the endpoints of the requested requirements:
+* Create property building
+* Add image from property
+* Change price
+* Update property
+  
+###List property with filters
+This requirement is developed in the endpoint /api/v1/Properties/Paging where the parameters are developed like this:
 
 ### Data Base
 La base de datos construída para la solución a nivel de tablas, se presenta el siguiente modelo enitdad/relación:
@@ -45,6 +52,7 @@ These services have been documented under Swagger for easy use in functional tes
 
 * From Visual Studio 2022 or Visual Studio Code it can be executed
 * As Entity Framework has been used in the development of this technical test, the solution has implemented that if it is executed for the first time, it creates the database and its respective tables. That is, it is not necessary to previously execute a creation script.
+  
 ## Autores
 
 Developer
