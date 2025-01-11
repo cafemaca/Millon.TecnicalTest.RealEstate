@@ -236,7 +236,29 @@ namespace Millon.TecnicalTest.RealEstate.Api.UnitTests.Controllers.Properties
         {
             // Arrange
             SearchQueryParameters searchQueryParameters = new SearchQueryParameters(null,null,null,1,10);
+
             PagedList<PropertyResponse> pagedList = new PagedList<PropertyResponse>();
+            pagedList.Items = new List<PropertyResponse>();
+            pagedList.Items.Add(
+                new PropertyResponse
+                {
+                    Id = 1,
+                    Name = "Finca La Ponderosa",
+                    Address = "Vereda Playa Alta - Florida",
+                    CodeInternal = "FINCA",
+                    Price = 120000000,
+                    Year = 2000,
+                    IdOwner = 1,
+                    Owner = new OwnerResponse
+                    {
+                        Id = 1,
+                        Name = "Carlos Malagón",
+                        Address = "Calle 66C",
+                        Photo = "cafemaca.png",
+                        Birthday = new DateOnly(1970, 6, 26)
+                    }
+                }
+                );
             _propertyserviceMock.Setup(x => x.SelectAllProperties(searchQueryParameters, default))
                 .ReturnsAsync(pagedList
                 );
