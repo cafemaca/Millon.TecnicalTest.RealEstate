@@ -41,7 +41,7 @@ These services have been documented under Swagger for easy use in functional tes
 ### Required manage
 * .NET Framework 9.0.
 * Entity Framework 9.0
-* Npgsql.EntityFrameworkCore.PostgreSQL 8.0
+* SQL Server
 
 ### installation
 * Download the code to the desired location.
