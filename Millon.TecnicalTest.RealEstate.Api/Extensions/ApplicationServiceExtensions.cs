@@ -55,8 +55,9 @@ namespace Millon.TecnicalTest.RealEstate.Api.Extensions
                 var interceptor = provider.GetRequiredService<AuditableInterceptor>();
 
                 //options.UseInMemoryDatabase(configuration.GetConnectionString(connectionStringValue))
-                options.UseNpgsql(configuration.GetConnectionString(connectionStringValue))
-                .AddInterceptors(interceptor);
+                //options.UseNpgsql(configuration.GetConnectionString(connectionStringValue))
+                //.AddInterceptors(interceptor);
+                options.UseSqlServer(configuration.GetConnectionString(connectionStringValue));
             }
             );
 
