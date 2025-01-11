@@ -20,6 +20,11 @@ The presentation of the solution is done through Swagger, which has the endpoint
   
 ### List property with filters
 This requirement is developed in the endpoint `/api/v1/Properties/Paging` where the parameters are developed like this:
+* "SearchTerm">This nullable string property is used to store a search term entered by the user. When this value is set, it can be used to filter the data based on the given search term, typically by matching the term with the content in one or more columns.
+* "ColumnFilters">This nullable string property is designed to store additional filtering criteria based on specific columns. The format for this property is not defined in the code snippet, but it could be, for example, a JSON string representing column names and their corresponding filter values. '{[{"ColumnName": "columnname","Value": "value"}]}'
+* "OrderBy">This property is a nullable string and is used to store the column name and sort order for sorting the data. For example, '{[{"ColumnName": "columnname","DESC": "True"}]}'.
+* "PageIndex">An integer property representing the current page number. It is initialized to 1 by default.
+* "PageSize">A public integer property with the Page Size.
 
 ### Data Base
 La base de datos construída para la solución a nivel de tablas, se presenta el siguiente modelo enitdad/relación:
