@@ -30,7 +30,7 @@ namespace Millon.TecnicalTest.RealEstate.Api.Controllers.Audit
     /// Controller de los endpoints para AuditTrails
     /// </summary>
     [ApiController]
-    [ApiVersion("2")]
+    [ApiVersion("1")]
     [Route("api/v{v:apiVersion}/[controller]")]
     public class AuditTrailsController : ControllerBase // ControllerBase is a base class for MVC controller without view support.
     {
