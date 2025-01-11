@@ -37,7 +37,7 @@ No creation script required. The application creates it at the first moment of e
 The REST API Web services have been implemented in the .NET Framework 9.0 and with the C# programming language.
 
 ### Code Coverage
-![Code Coverage](/images/CoverCode.png)
+![Code Coverage](/image/CoverCode.png)
 
 These services have been documented under Swagger for easy use in functional testing and documentation:
 
