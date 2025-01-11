@@ -16,7 +16,9 @@ The presentation of the solution is done through Swagger, which has the endpoint
 ### Create property building
 This requirement is developed in the endpoint `/api/v1/Properties`
 ### Add image from property
+This requirement is developed in the endpoint `/api/v1/Properties/{id}/AddImage`
 ### Change price
+This requirement is developed in the endpoint `/api/v1/Properties/{id}/UpdatePrice`
 ### Update property
 This requirement is developed in the endpoint `/api/v1/Properties/{Id}` where Id is the Property Id (unique).
 ### List property with filters
