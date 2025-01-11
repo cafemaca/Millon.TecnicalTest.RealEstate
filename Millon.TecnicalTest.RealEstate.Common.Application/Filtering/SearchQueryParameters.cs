@@ -33,10 +33,5 @@ namespace Millon.TecnicalTest.RealEstate.Common.Application.Filtering
     /// </param>
     /// <param name="PageSize">A public integer property with the Page Size.
     /// </param>
-    public record SearchQueryParameters(string? SearchTerm, string? ColumnFilters, string? OrderBy, int PageIndex = 1, int PageSize = 10) : PaginationQueryParameters(PageIndex, PageSize)
-    {
-        public SearchQueryParameters()
-        {
-        }
-    }
+    public record SearchQueryParameters(string? SearchTerm, string? ColumnFilters, string? OrderBy, int PageIndex, int PageSize) : PaginationQueryParameters(PageIndex, PageSize);
 }

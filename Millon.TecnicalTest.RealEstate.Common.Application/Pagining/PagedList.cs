@@ -16,7 +16,7 @@ namespace Millon.TecnicalTest.RealEstate.Common.Application.Pagining
 {
     public class PagedList<T>
     {
-        public List<T> Items { get; private set; }
+        public List<T> Items { get; set; }
         public int PageSize { get; private set; }
         public int CurrentPage { get; private set; }
         public int TotalItemCount { get; private set; }
@@ -31,6 +31,10 @@ namespace Millon.TecnicalTest.RealEstate.Common.Application.Pagining
             TotalItemCount = totalItemCount;
             TotalPageCount = (int)Math.Ceiling(TotalItemCount / (double)PageSize);
             Items = items;
+        }
+
+        public PagedList()
+        {
         }
 
         public static PagedList<T> Create(IEnumerable<T> items, int pageIndex, int pageSize)
