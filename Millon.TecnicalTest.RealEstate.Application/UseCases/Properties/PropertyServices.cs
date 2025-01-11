@@ -41,19 +41,26 @@ namespace Millon.TecnicalTest.RealEstate.Application.UseCases.Properties
         private readonly IPropertyRepository _propertyRepository;
         private readonly IValidator<PropertyCreateRequest> _createValidator;
         private readonly IValidator<PropertyUpdateRequest> _updateValidator;
+        private readonly IValidator<PropertyUpdatePriceRequest> _updatePriceValidator;
+        private readonly IValidator<PropertyImageCreateRequest> _addImageValidator;
 
         public PropertyServices(ILogger<PropertyServices> logger
             , IMapper mapper
             , IUnitOfWork unitOfWork
             , IPropertyRepository propertyRepository
             , IValidator<PropertyCreateRequest> createValidator
-            , IValidator<PropertyUpdateRequest> updateValidator)
+            , IValidator<PropertyUpdateRequest> updateValidator
+            , IValidator<PropertyUpdatePriceRequest> updatePriceValidator
+            , IValidator<PropertyImageCreateRequest> addImageValidator
+            )
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _propertyRepository = propertyRepository ?? throw new ArgumentNullException(nameof(propertyRepository));
             _createValidator = createValidator;
             _updateValidator = updateValidator;
+            _updatePriceValidator = updatePriceValidator;
+            _addImageValidator = addImageValidator;
         }
 
         public async Task<Result<PropertyResponse?, IEnumerable<DomainError>>> CreatePropertyAsync(PropertyCreateRequest propertyRequest, CancellationToken cancellationToken)
@@ -151,6 +158,64 @@ namespace Millon.TecnicalTest.RealEstate.Application.UseCases.Properties
                 {
                     _mapper.Map<PropertyUpdateRequest, Property>(propertyRequest, property);
                     property.Id = id;
+
+                    await _propertyRepository.UpdateAsync(property, cancellationToken).ConfigureAwait(false);
+                    await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+                    return true;
+                }
+                else
+                {
+                    List<DomainError> errors = new List<DomainError>();
+                    errors.Add(PropertyErrors.NotFound(id));
+                    return errors;
+                }
+            }
+            else
+            {
+                return _mapper.Map<List<DomainError>>(result.Errors);
+            }
+        }
+        public async Task<Result<bool, IEnumerable<DomainError>>> UpdatePriceAsync(int id, PropertyUpdatePriceRequest propertyRequest, CancellationToken cancellationToken)
+        {
+            ValidationResult result = await _updatePriceValidator.ValidateAsync(propertyRequest, cancellationToken).ConfigureAwait(false);
+            if (result.IsValid)
+            {
+                Property? property = await _propertyRepository.GetAsync(id, cancellationToken).ConfigureAwait(false);
+                if (property != null)
+                {
+                    _mapper.Map<PropertyUpdatePriceRequest, Property>(propertyRequest, property);
+                    property.Id = id;
+
+                    await _propertyRepository.UpdateAsync(property, cancellationToken).ConfigureAwait(false);
+                    await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+                    return true;
+                }
+                else
+                {
+                    List<DomainError> errors = new List<DomainError>();
+                    errors.Add(PropertyErrors.NotFound(id));
+                    return errors;
+                }
+            }
+            else
+            {
+                return _mapper.Map<List<DomainError>>(result.Errors);
+            }
+        }
+        public async Task<Result<bool, IEnumerable<DomainError>>> AddImageAsync(int id, PropertyImageCreateRequest propertyRequest, CancellationToken cancellationToken)
+        {
+            ValidationResult result = await _addImageValidator.ValidateAsync(propertyRequest, cancellationToken).ConfigureAwait(false);
+            if (result.IsValid)
+            {
+                Property? property = await _propertyRepository.GetAsync(id, cancellationToken).ConfigureAwait(false);
+                if (property != null)
+                {
+                    PropertyImage image = new PropertyImage();
+                    _mapper.Map<PropertyImageCreateRequest, PropertyImage>(propertyRequest, image);
+                    image.IdProperty = id;
+                    property.Images.Add(image);
 
                     await _propertyRepository.UpdateAsync(property, cancellationToken).ConfigureAwait(false);
                     await _unitOfWork.SaveChangesAsync(cancellationToken);

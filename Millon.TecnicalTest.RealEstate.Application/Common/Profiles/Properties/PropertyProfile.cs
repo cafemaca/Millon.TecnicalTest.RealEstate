@@ -50,6 +50,9 @@ namespace Millon.TecnicalTest.RealEstate.Application.Common.Profiles.Properties
                        .ForMember(dest => dest.Images, src => src.MapFrom(x => x.Images))
                        .ForMember(dest => dest.Traces, src => src.MapFrom(x => x.Traces));
 
+            CreateMap<PropertyUpdatePriceRequest, Property>()
+                       .ForMember(dest => dest.Price, src => src.MapFrom(x => x.Price));
+
         }
     }
 }

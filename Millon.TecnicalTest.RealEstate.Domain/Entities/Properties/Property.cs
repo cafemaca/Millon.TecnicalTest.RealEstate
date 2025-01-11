@@ -32,7 +32,7 @@ namespace Millon.TecnicalTest.RealEstate.Domain.Entities.Properties
         public Owner Owner { get; set; }
 
 
-        public ICollection<PropertyImage> Images { get; set; }
+        public ICollection<PropertyImage> Images { get; set; } = new List<PropertyImage>();
         public ICollection<PropertyTrace> Traces { get; set; }
 
 

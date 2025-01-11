@@ -95,7 +95,7 @@ namespace Millon.TecnicalTest.RealEstate.Api.Controllers.Properties
         }
 
         /// <summary>
-        /// Get all propertys
+        /// Get all properties
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
@@ -108,21 +108,21 @@ namespace Millon.TecnicalTest.RealEstate.Api.Controllers.Properties
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var propertysResult = await _propertyServices.SelectAllProperties(cancellationToken);
+            var propertiesResult = await _propertyServices.SelectAllProperties(cancellationToken);
 
-            return propertysResult.Match<IActionResult>(
+            return propertiesResult.Match<IActionResult>(
                 m => Ok(m),
                 fail => NotFound(fail)
                 );
         }
 
         /// <summary>
-        /// 
+        /// It brings a paginated list of the properties according to the desired criteria and order, passed in the parameters.
         /// </summary>
-        /// <param name="searchQueryParameters"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="searchQueryParameters">Search Criteria</param>
+        /// <param name="cancellationToken">Cancellation Token</param>
         /// <returns></returns>
-        [MapToApiVersion("2")]
+        [MapToApiVersion("1")]
         [HttpGet("Paging", Name = "PropertyPaging")]
         [ProducesResponseType(typeof(IEnumerable<PropertyResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(DomainError), StatusCodes.Status404NotFound)]
@@ -135,16 +135,16 @@ namespace Millon.TecnicalTest.RealEstate.Api.Controllers.Properties
             if (searchQueryParameters.PageIndex <= 0 || searchQueryParameters.PageSize <= 0)
                 return BadRequest(ApplicationErrors.ValidPropertiesPage(searchQueryParameters.PageIndex, searchQueryParameters.PageSize));
 
-            var propertysResult = await _propertyServices.SelectAllProperties(searchQueryParameters, cancellationToken);
+            var propertiesResult = await _propertyServices.SelectAllProperties(searchQueryParameters, cancellationToken);
 
             // Add pagination metadata to headers
-            var pagedItems = propertysResult.Match<PagedList<PropertyResponse>>(
+            var pagedItems = propertiesResult.Match<PagedList<PropertyResponse>>(
                 m => m,
                 fail => null
             );
             this.AddPaginationMetadata(pagedItems, searchQueryParameters);
 
-            return propertysResult.Match<IActionResult>(
+            return propertiesResult.Match<IActionResult>(
                 m => Ok(m.Items),
                 fail => NotFound(fail)
                 );
@@ -167,6 +167,54 @@ namespace Millon.TecnicalTest.RealEstate.Api.Controllers.Properties
             cancellationToken.ThrowIfCancellationRequested();
 
             var result = await _propertyServices.UpdateAsync(id, propertyRequest, cancellationToken).ConfigureAwait(false);
+
+            return result.Match<IActionResult>(
+                m => Ok(m),
+                fail => BadRequest(fail)
+                );
+        }
+
+        /// <summary>
+        /// Update the Property Price.
+        /// </summary>
+        /// <param name="id">Property Id</param>
+        /// <param name="propertyRequest">New Property Price</param>
+        /// <param name="cancellationToken">Cancellantion Token</param>
+        /// <returns></returns>
+        [MapToApiVersion("1")]
+        [HttpPut("{id}/UpdatePrice", Name = "UpdatePrice")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<DomainError>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UpdatePrice([FromRoute] int id, [FromBody] PropertyUpdatePriceRequest propertyRequest, CancellationToken cancellationToken = default)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            var result = await _propertyServices.UpdatePriceAsync(id, propertyRequest, cancellationToken).ConfigureAwait(false);
+
+            return result.Match<IActionResult>(
+                m => Ok(m),
+                fail => BadRequest(fail)
+                );
+        }
+
+        /// <summary>
+        /// Addd a new Image to the Property.
+        /// </summary>
+        /// <param name="id">Property Id</param>
+        /// <param name="propertyRequest">New Property Price</param>
+        /// <param name="cancellationToken">Cancellantion Token</param>
+        /// <returns></returns>
+        [MapToApiVersion("1")]
+        [HttpPut("{id}/AddImage", Name = "AddImage")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<DomainError>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> AddImage([FromRoute] int id, [FromBody] PropertyImageCreateRequest propertyImageCreateRequest, CancellationToken cancellationToken = default)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            var result = await _propertyServices.AddImageAsync(id, propertyImageCreateRequest, cancellationToken).ConfigureAwait(false);
 
             return result.Match<IActionResult>(
                 m => Ok(m),

@@ -40,6 +40,8 @@ namespace Millon.TecnicalTest.RealEstate.Application
 
             services.AddTransient<IValidator<PropertyCreateRequest>, PropertyCreateRequestValidator>();
             services.AddTransient<IValidator<PropertyUpdateRequest>, PropertyUpdateRequestValidator>();
+            services.AddTransient<IValidator<PropertyUpdatePriceRequest>, PropertyUpdatePriceRequestValidator>();
+            services.AddTransient<IValidator<PropertyImageCreateRequest>, PropertyAddImageRequestValidator>();
 
             #endregion
 

@@ -27,10 +27,12 @@ namespace Millon.TecnicalTest.RealEstate.Application.Common.Interfaces.Services.
         Task<Result<PagedList<PropertyResponse>, DomainError>> SelectAllProperties(SearchQueryParameters searchQueryParameters, CancellationToken cancellationToken);
         Task<Result<PropertyResponse?, DomainError>> SelectPropertyByIdAsync(int id, CancellationToken cancellationToken);
 
-        Task<Result<PropertyResponse?, IEnumerable<DomainError>>> CreatePropertyAsync(PropertyCreateRequest ownerRequest, CancellationToken cancellationToken);
+        Task<Result<PropertyResponse?, IEnumerable<DomainError>>> CreatePropertyAsync(PropertyCreateRequest propertyRequest, CancellationToken cancellationToken);
 
         Task<Result<bool, DomainError>> DeletePropertyAsync(int id, CancellationToken cancellationToken);
 
-        Task<Result<bool, IEnumerable<DomainError>>> UpdateAsync(int id, PropertyUpdateRequest ownerRequest, CancellationToken cancellationToken);
+        Task<Result<bool, IEnumerable<DomainError>>> UpdateAsync(int id, PropertyUpdateRequest propertyRequest, CancellationToken cancellationToken);
+        Task<Result<bool, IEnumerable<DomainError>>> UpdatePriceAsync(int id, PropertyUpdatePriceRequest propertyRequest, CancellationToken cancellationToken);
+        Task<Result<bool, IEnumerable<DomainError>>> AddImageAsync(int id, PropertyImageCreateRequest propertyImageCreateRequest, CancellationToken cancellationToken);
     }
 }
