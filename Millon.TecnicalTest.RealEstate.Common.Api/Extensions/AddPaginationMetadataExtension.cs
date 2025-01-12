@@ -38,10 +38,10 @@ namespace Millon.TecnicalTest.RealEstate.Common.Api.Extensions
             string? previousPageUrl = null;
             string? nextPageUrl = null;
 
-            HttpGetAttribute? paginationAttribute = controller.ControllerContext.ActionDescriptor.MethodInfo
+            HttpGetAttribute? paginationAttribute = controller.ControllerContext.ActionDescriptor?.MethodInfo
                 .GetCustomAttributes(false).First(obj => obj is HttpGetAttribute) as HttpGetAttribute;
 
-            var routeName = paginationAttribute.Name;
+            var routeName = paginationAttribute?.Name;
 
             if (pagedItems.HasPrevious)
             {
@@ -62,7 +62,7 @@ namespace Millon.TecnicalTest.RealEstate.Common.Api.Extensions
             }
 
             // Add header
-            controller.Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(
+            controller.Response?.Headers.Append("X-Pagination", JsonSerializer.Serialize(
                 new
                 {
                     queryParameters.SearchTerm,
