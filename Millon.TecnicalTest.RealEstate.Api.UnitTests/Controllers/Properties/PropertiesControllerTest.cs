@@ -269,8 +269,8 @@ namespace Millon.TecnicalTest.RealEstate.Api.UnitTests.Controllers.Properties
 
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
-            var item = Assert.IsType<PropertyResponse>(okResult.Value);
-            Assert.Equal(1, item.Id);
+            var item = Assert.IsType<List<PropertyResponse>>(okResult.Value);
+            Assert.Equal(1, item.Count);
 
         }
     }
